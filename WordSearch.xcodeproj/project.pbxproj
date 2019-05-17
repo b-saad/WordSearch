@@ -8,20 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		9C397272228DC1CC00C77622 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C397271228DC1CC00C77622 /* AppDelegate.swift */; };
-		9C397274228DC1CC00C77622 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C397273228DC1CC00C77622 /* ViewController.swift */; };
+		9C397274228DC1CC00C77622 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C397273228DC1CC00C77622 /* MainViewController.swift */; };
 		9C397277228DC1CC00C77622 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C397275228DC1CC00C77622 /* Main.storyboard */; };
 		9C397279228DC1CE00C77622 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C397278228DC1CE00C77622 /* Assets.xcassets */; };
 		9C39727C228DC1CE00C77622 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C39727A228DC1CE00C77622 /* LaunchScreen.storyboard */; };
+		9C397284228DC20A00C77622 /* GridCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C397283228DC20A00C77622 /* GridCollectionViewController.swift */; };
+		9C397287228DC65800C77622 /* GridCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C397286228DC65800C77622 /* GridCell.xib */; };
+		9C39728A228DC66B00C77622 /* GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C397289228DC66B00C77622 /* GridCell.swift */; };
+		9C39728D228DC6B700C77622 /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C39728C228DC6B700C77622 /* UICollectionViewExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9C39726E228DC1CC00C77622 /* WordSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C397271228DC1CC00C77622 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9C397273228DC1CC00C77622 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9C397273228DC1CC00C77622 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		9C397276228DC1CC00C77622 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9C397278228DC1CE00C77622 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9C39727B228DC1CE00C77622 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9C39727D228DC1CE00C77622 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9C397283228DC20A00C77622 /* GridCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCollectionViewController.swift; sourceTree = "<group>"; };
+		9C397286228DC65800C77622 /* GridCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GridCell.xib; sourceTree = "<group>"; };
+		9C397289228DC66B00C77622 /* GridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCell.swift; sourceTree = "<group>"; };
+		9C39728C228DC6B700C77622 /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +62,50 @@
 		9C397270228DC1CC00C77622 /* WordSearch */ = {
 			isa = PBXGroup;
 			children = (
+				9C39728E228DC6BD00C77622 /* Extensions */,
+				9C397288228DC65E00C77622 /* UI */,
+				9C397285228DC21500C77622 /* ViewControllers */,
 				9C397271228DC1CC00C77622 /* AppDelegate.swift */,
-				9C397273228DC1CC00C77622 /* ViewController.swift */,
 				9C397275228DC1CC00C77622 /* Main.storyboard */,
 				9C397278228DC1CE00C77622 /* Assets.xcassets */,
 				9C39727A228DC1CE00C77622 /* LaunchScreen.storyboard */,
 				9C39727D228DC1CE00C77622 /* Info.plist */,
 			);
 			path = WordSearch;
+			sourceTree = "<group>";
+		};
+		9C397285228DC21500C77622 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9C397273228DC1CC00C77622 /* MainViewController.swift */,
+				9C397283228DC20A00C77622 /* GridCollectionViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9C397288228DC65E00C77622 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				9C39728B228DC67100C77622 /* Cells */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		9C39728B228DC67100C77622 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				9C397286228DC65800C77622 /* GridCell.xib */,
+				9C397289228DC66B00C77622 /* GridCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		9C39728E228DC6BD00C77622 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9C39728C228DC6B700C77622 /* UICollectionViewExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,6 +169,7 @@
 				9C39727C228DC1CE00C77622 /* LaunchScreen.storyboard in Resources */,
 				9C397279228DC1CE00C77622 /* Assets.xcassets in Resources */,
 				9C397277228DC1CC00C77622 /* Main.storyboard in Resources */,
+				9C397287228DC65800C77622 /* GridCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,8 +180,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C397274228DC1CC00C77622 /* ViewController.swift in Sources */,
+				9C397274228DC1CC00C77622 /* MainViewController.swift in Sources */,
+				9C397284228DC20A00C77622 /* GridCollectionViewController.swift in Sources */,
 				9C397272228DC1CC00C77622 /* AppDelegate.swift in Sources */,
+				9C39728A228DC66B00C77622 /* GridCell.swift in Sources */,
+				9C39728D228DC6B700C77622 /* UICollectionViewExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
