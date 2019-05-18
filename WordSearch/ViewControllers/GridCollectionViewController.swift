@@ -8,39 +8,30 @@
 
 import UIKit
 
+protocol GridCollectionViewControllerDelegate: AnyObject {
+    func wordFound(word: String)
+}
+
 final class GridCollectionViewController: NSObject {
     
     // MARK: Properties
     private let collectionView: UICollectionView
-    private var data = [[Int]]()
-    private var words = [
-        "123456",
-        "2233445566",
-        "99897969",
-        "41424344454647"
-    ]
+    private var data = [[String]]()
+    private var words = [String]()
     private var wordsFound = [String]()
     private var remainingWords = [String]()
     private var selectedCells = [IndexPath]()
     private var selectionDirection: SelectionDirection = .none
+    var delegate: GridCollectionViewControllerDelegate?
     
     // MARK: Initialization
-    init(collectionView: UICollectionView) {
+    init(collectionView: UICollectionView, words: [String]) {
         self.collectionView = collectionView
         super.init()
         
-        data.append(contentsOf:
-            [Array(0...9),
-             Array(10...19),
-             Array(20...29),
-             Array(30...39),
-             Array(40...49),
-             Array(50...59),
-             Array(60...69),
-             Array(70...79),
-             Array(80...89),
-             Array(90...99)]
-        )
+        self.words = words.map({$0.uppercased()})
+        let wordSearchGenerator = WordSearchGenerator(numRows: 10, numColumns: 10, words: self.words)
+        data = wordSearchGenerator.generateWordSearch()
         
         collectionView.register(.GridCell, forCellWithReuseIdentifier: String(describing: GridCell.self))
         
@@ -49,7 +40,7 @@ final class GridCollectionViewController: NSObject {
         
         setupCollectionView()
         
-        remainingWords = words
+        remainingWords = self.words
     }
 }
 
@@ -88,7 +79,6 @@ extension GridCollectionViewController: UIGestureRecognizerDelegate {
                         } else {
                             selectionDirection = .diagonal
                         }
-                        print(selectionDirection)
                     }
                     switch selectionDirection {
                     case .vertical:
@@ -115,14 +105,18 @@ extension GridCollectionViewController: UIGestureRecognizerDelegate {
                 var selectedChars = ""
                 var wordFound = false
                 for indexPath in selectedCells {
-                    selectedChars += String(data[indexPath.section][indexPath.row])
+                    selectedChars += data[indexPath.section][indexPath.row]
                 }
-                
-                print(selectedChars)
-                print(remainingWords)
-                if remainingWords.contains(selectedChars) || remainingWords.contains(String(selectedChars.reversed())){
+                let charsReversed = String(selectedChars.reversed())
+                if remainingWords.contains(selectedChars) {
                     remainingWords.removeAll { $0 == selectedChars }
                     wordsFound.append(selectedChars)
+                    delegate?.wordFound(word: selectedChars)
+                    wordFound = true
+                } else if remainingWords.contains(charsReversed) {
+                    remainingWords.removeAll { $0 == charsReversed }
+                    wordsFound.append(selectedChars)
+                    delegate?.wordFound(word: charsReversed)
                     wordFound = true
                 }
                 for indexPath in selectedCells {
@@ -159,9 +153,9 @@ extension GridCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let column = indexPath.row
         let row = indexPath.section
-        let number = data[row][column]
+        let character = data[row][column]
         let cell: GridCell = collectionView.dequeueReusableCell(for: indexPath)
-        cell.set(text: String(number))
+        cell.set(text: character)
         return cell
     }
     

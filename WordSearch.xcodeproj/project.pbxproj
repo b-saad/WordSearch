@@ -16,6 +16,10 @@
 		9C397287228DC65800C77622 /* GridCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C397286228DC65800C77622 /* GridCell.xib */; };
 		9C39728A228DC66B00C77622 /* GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C397289228DC66B00C77622 /* GridCell.swift */; };
 		9C39728D228DC6B700C77622 /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C39728C228DC6B700C77622 /* UICollectionViewExtension.swift */; };
+		9C785C50228F268E006FDB9C /* WordSearchGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C785C4F228F268E006FDB9C /* WordSearchGenerator.swift */; };
+		9C785C52228F7FB2006FDB9C /* WordListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C785C51228F7FB2006FDB9C /* WordListCollectionViewController.swift */; };
+		9C785C54228F7FC7006FDB9C /* WordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C785C53228F7FC7006FDB9C /* WordCell.xib */; };
+		9C785C56228F801D006FDB9C /* WordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C785C55228F801D006FDB9C /* WordCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +34,10 @@
 		9C397286228DC65800C77622 /* GridCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GridCell.xib; sourceTree = "<group>"; };
 		9C397289228DC66B00C77622 /* GridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCell.swift; sourceTree = "<group>"; };
 		9C39728C228DC6B700C77622 /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
+		9C785C4F228F268E006FDB9C /* WordSearchGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSearchGenerator.swift; sourceTree = "<group>"; };
+		9C785C51228F7FB2006FDB9C /* WordListCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListCollectionViewController.swift; sourceTree = "<group>"; };
+		9C785C53228F7FC7006FDB9C /* WordCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WordCell.xib; sourceTree = "<group>"; };
+		9C785C55228F801D006FDB9C /* WordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +70,7 @@
 		9C397270228DC1CC00C77622 /* WordSearch */ = {
 			isa = PBXGroup;
 			children = (
+				9C785C4F228F268E006FDB9C /* WordSearchGenerator.swift */,
 				9C39728E228DC6BD00C77622 /* Extensions */,
 				9C397288228DC65E00C77622 /* UI */,
 				9C397285228DC21500C77622 /* ViewControllers */,
@@ -79,6 +88,7 @@
 			children = (
 				9C397273228DC1CC00C77622 /* MainViewController.swift */,
 				9C397283228DC20A00C77622 /* GridCollectionViewController.swift */,
+				9C785C51228F7FB2006FDB9C /* WordListCollectionViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -96,6 +106,8 @@
 			children = (
 				9C397286228DC65800C77622 /* GridCell.xib */,
 				9C397289228DC66B00C77622 /* GridCell.swift */,
+				9C785C53228F7FC7006FDB9C /* WordCell.xib */,
+				9C785C55228F801D006FDB9C /* WordCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -170,6 +182,7 @@
 				9C397279228DC1CE00C77622 /* Assets.xcassets in Resources */,
 				9C397277228DC1CC00C77622 /* Main.storyboard in Resources */,
 				9C397287228DC65800C77622 /* GridCell.xib in Resources */,
+				9C785C54228F7FC7006FDB9C /* WordCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,7 +197,10 @@
 				9C397284228DC20A00C77622 /* GridCollectionViewController.swift in Sources */,
 				9C397272228DC1CC00C77622 /* AppDelegate.swift in Sources */,
 				9C39728A228DC66B00C77622 /* GridCell.swift in Sources */,
+				9C785C52228F7FB2006FDB9C /* WordListCollectionViewController.swift in Sources */,
+				9C785C56228F801D006FDB9C /* WordCell.swift in Sources */,
 				9C39728D228DC6B700C77622 /* UICollectionViewExtension.swift in Sources */,
+				9C785C50228F268E006FDB9C /* WordSearchGenerator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

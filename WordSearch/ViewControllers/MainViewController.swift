@@ -11,14 +11,28 @@ import UIKit
 class MainViewController: UIViewController {
     
     // MARK: IBOutlets
-    @IBOutlet private var collectionView: UICollectionView!
+    @IBOutlet private var gridCollectionView: UICollectionView!
+    @IBOutlet private var wordListCollectionView: UICollectionView!
     
     // MARK: Properties
     private var gridCollectionViewController: GridCollectionViewController?
+    private var wordListCollectionViewController: WordListCollectionViewController?
+    private let words = [
+        "Swift",
+        "Kotlin",
+        "ObjectiveC",
+        "Variable",
+        "Java",
+        "Mobile"
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        gridCollectionViewController = GridCollectionViewController(collectionView: collectionView)
+        wordListCollectionViewController = WordListCollectionViewController(collectionView: wordListCollectionView, words: words)
+        gridCollectionViewController = GridCollectionViewController(collectionView: gridCollectionView, words: words)
+        if let wordListCVC = wordListCollectionViewController {
+            gridCollectionViewController?.delegate = wordListCVC
+        }
     }
 
 }
