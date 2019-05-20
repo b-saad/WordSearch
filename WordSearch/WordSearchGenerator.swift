@@ -8,19 +8,30 @@
 
 import UIKit
 
-struct WordSearchGenerator {
+protocol WordSearchGeneratorDelegate: AnyObject {
+    func wordSearchFilled(with words: [String])
+}
+
+final class WordSearchGenerator {
+    
+    // MARK: Properties
     private let numRows: Int
     private let numColumns: Int
-    private let words: [String]
+    private let potentialWords: [String]
+    private var wordsAdded = [String]()
+    var delegate: WordSearchGeneratorDelegate?
     
+    // MARK: Initialization
     init(numRows: Int, numColumns: Int, words: [String]) {
         self.numRows = numRows
         self.numColumns = numColumns
-        self.words = words.map({$0.uppercased()})
+        self.potentialWords = words.map({$0.uppercased()})
     }
     
     func generateWordSearch() -> [[String]] {
-        return fillWordSearch()
+        let wordSearch = createWordSearch()
+        delegate?.wordSearchFilled(with: wordsAdded)
+        return wordSearch
     }
 }
 
@@ -36,10 +47,9 @@ private extension WordSearchGenerator {
         return empty2DArray
     }
     
-    func fillWordSearch() -> [[String]] {
+    func createWordSearch() -> [[String]] {
         var wordSearch = generateEmptyWordSearch()
-        
-        for word in words {
+        for word in potentialWords {
             var orientationsAttempted = [WordOrientation]()
             var remainingOrientations = WordOrientation.allOrientations()
             while remainingOrientations.count != 0 {
@@ -53,7 +63,6 @@ private extension WordSearchGenerator {
                 break
             }
         }
-        
         return fillBlanksWithRandomChar(wordSearch: wordSearch)
     }
     
@@ -113,6 +122,7 @@ private extension WordSearchGenerator {
                     continue
                 }
                 if canBeInserted {
+                    wordsAdded.append(word)
                     for (i, char) in word.enumerated() {
                         newWordSearch[randomRow + (i * direction)][randomColumn] = String(char)
                     }
@@ -160,6 +170,7 @@ private extension WordSearchGenerator {
                     continue
                 }
                 if canBeInserted {
+                    wordsAdded.append(word)
                     for (i, char) in word.enumerated() {
                         newWordSearch[randomRow][randomColumn + (i * direction)] = String(char)
                     }
@@ -212,6 +223,7 @@ private extension WordSearchGenerator {
                     continue
                 }
                 if canBeInserted {
+                    wordsAdded.append(word)
                     for (i, char) in word.enumerated() {
                         newWordSearch[randomRow + (i * verticalDirection)][randomColumn + (i * horizontalDirection)] = String(char)
                     }
@@ -240,7 +252,7 @@ private extension WordSearchGenerator {
     }
 }
 
-fileprivate enum WordOrientation: Equatable {
+enum WordOrientation: Equatable {
     case Vertical(VerticalOptions)
     case Horizontal(HorizontalOptions)
     case diagonal(VerticalOptions, HorizontalOptions)

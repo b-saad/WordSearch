@@ -15,7 +15,7 @@ final class WordCell: UICollectionViewCell {
     
     // MARK: Setup
     func set(text: String) {
-        textLabel.text = text.capitalized
+        textLabel.text = text
     }
     
     func strikeThroughText() {

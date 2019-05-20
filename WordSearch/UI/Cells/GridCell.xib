@@ -12,16 +12,16 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GridCell" id="hm7-w4-IWS" customClass="GridCell" customModule="WordSearch" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+        <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GridCell" id="hm7-w4-IWS" customClass="GridCell" customModule="WordSearch" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="263" height="263"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                <rect key="frame" x="0.0" y="0.0" width="263" height="263"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pSv-xh-rqA">
-                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                        <rect key="frame" x="0.0" y="0.0" width="263" height="263"/>
+                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -34,9 +34,11 @@
                 <constraint firstAttribute="bottom" secondItem="pSv-xh-rqA" secondAttribute="bottom" id="z8X-DH-I6J"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="GID-LI-tLu"/>
+            <size key="customSize" width="263" height="198"/>
             <connections>
                 <outlet property="textLabel" destination="pSv-xh-rqA" id="Dyj-Yk-QV4"/>
             </connections>
+            <point key="canvasLocation" x="286.23188405797106" y="124.55357142857142"/>
         </collectionViewCell>
     </objects>
 </document>

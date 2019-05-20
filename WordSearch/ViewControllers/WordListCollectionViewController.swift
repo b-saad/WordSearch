@@ -12,17 +12,24 @@ final class WordListCollectionViewController: NSObject {
     
     // MARK: Properties
     private let collectionView: UICollectionView
-    private var data = [String]()
+    private var data = [String]() {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     
     // MARK: Initialization
-    init(collectionView: UICollectionView, words: [String]) {
+    init(collectionView: UICollectionView) {
         self.collectionView = collectionView
-        self.data = words.map({$0.uppercased()})
         super.init()
 
         collectionView.register(.WordCell, forCellWithReuseIdentifier: String(describing: WordCell.self))
         collectionView.dataSource = self
         collectionView.delegate = self
+    }
+    
+    func setData(words: [String]) {
+        self.data = words
     }
 }
 
@@ -46,8 +53,8 @@ extension WordListCollectionViewController: UICollectionViewDelegate {}
 // MARK - UICollectionViewDelegateFlowLayout
 extension WordListCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let height = collectionView.frame.height / 4
-        let width = collectionView.frame.width / 3
+        let height = collectionView.frame.height / 5
+        let width = collectionView.frame.width / 2
         return CGSize(width: width, height: height)
     }
     

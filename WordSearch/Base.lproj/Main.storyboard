@@ -18,8 +18,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Words Found: 5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4eQ-M1-vs1" userLabel="Top Label">
+                                <rect key="frame" x="8" y="44" width="398" height="100"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="34"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="I15-89-PjU">
-                                <rect key="frame" x="0.0" y="194" width="414" height="414"/>
+                                <rect key="frame" x="8" y="144" width="398" height="398"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="I15-89-PjU" secondAttribute="height" multiplier="1:1" id="IO7-XQ-XWW"/>
@@ -41,8 +47,12 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <view opaque="NO" alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bOP-m0-bUZ" userLabel="Word List Background View">
+                                <rect key="frame" x="8" y="552" width="398" height="329"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zpU-rv-QhA">
-                                <rect key="frame" x="0.0" y="608" width="414" height="254"/>
+                                <rect key="frame" x="8" y="560" width="398" height="313"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="b7h-EW-C15">
                                     <size key="itemSize" width="50" height="50"/>
@@ -62,20 +72,30 @@
                                 </cells>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.16078431372549018" blue="0.40784313725490196" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.10734280438101974" green="0.31255809059132134" blue="0.66543277030914472" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="zpU-rv-QhA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="0dx-hS-bat"/>
-                            <constraint firstItem="I15-89-PjU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="150" id="40d-hH-WW0"/>
-                            <constraint firstItem="I15-89-PjU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Bde-FF-SAo"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="zpU-rv-QhA" secondAttribute="bottom" id="Exr-mq-ZmX"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zpU-rv-QhA" secondAttribute="trailing" id="VOI-Cc-Z8b"/>
-                            <constraint firstItem="zpU-rv-QhA" firstAttribute="top" secondItem="I15-89-PjU" secondAttribute="bottom" id="nP3-ef-fyi"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="I15-89-PjU" secondAttribute="trailing" id="oWc-ET-VrV"/>
+                            <constraint firstItem="I15-89-PjU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="40d-hH-WW0"/>
+                            <constraint firstItem="4eQ-M1-vs1" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Axn-Fo-Xqb"/>
+                            <constraint firstItem="I15-89-PjU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="Bde-FF-SAo"/>
+                            <constraint firstAttribute="bottom" secondItem="bOP-m0-bUZ" secondAttribute="bottom" constant="15" id="ENl-Ai-Y7U"/>
+                            <constraint firstItem="zpU-rv-QhA" firstAttribute="leading" secondItem="bOP-m0-bUZ" secondAttribute="leading" id="OpU-JN-fjn"/>
+                            <constraint firstItem="4eQ-M1-vs1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="S1r-kC-o26"/>
+                            <constraint firstItem="bOP-m0-bUZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="SSZ-4A-a62"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4eQ-M1-vs1" secondAttribute="trailing" constant="8" id="a78-EG-lZ4"/>
+                            <constraint firstItem="bOP-m0-bUZ" firstAttribute="bottom" secondItem="zpU-rv-QhA" secondAttribute="bottom" constant="8" id="alA-UV-fgg"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bOP-m0-bUZ" secondAttribute="trailing" constant="8" id="iQK-m4-BDC"/>
+                            <constraint firstItem="zpU-rv-QhA" firstAttribute="trailing" secondItem="bOP-m0-bUZ" secondAttribute="trailing" id="o3H-GO-9uy"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="I15-89-PjU" secondAttribute="trailing" constant="8" id="oWc-ET-VrV"/>
+                            <constraint firstItem="I15-89-PjU" firstAttribute="top" secondItem="4eQ-M1-vs1" secondAttribute="bottom" id="rUU-OT-N7I"/>
+                            <constraint firstItem="bOP-m0-bUZ" firstAttribute="top" secondItem="I15-89-PjU" secondAttribute="bottom" constant="10" id="wDK-su-cj4"/>
+                            <constraint firstItem="zpU-rv-QhA" firstAttribute="top" secondItem="bOP-m0-bUZ" secondAttribute="top" constant="8" id="ypB-Pw-gnj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="gridCollectionView" destination="I15-89-PjU" id="LRH-jq-8im"/>
+                        <outlet property="topLabel" destination="4eQ-M1-vs1" id="Lc7-Me-ws7"/>
+                        <outlet property="wordListBackgroundView" destination="bOP-m0-bUZ" id="KyT-K8-otN"/>
                         <outlet property="wordListCollectionView" destination="zpU-rv-QhA" id="JON-Pa-RUJ"/>
                     </connections>
                 </viewController>

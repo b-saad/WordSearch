@@ -16,31 +16,35 @@ final class GridCollectionViewController: NSObject {
     
     // MARK: Properties
     private let collectionView: UICollectionView
-    private var data = [[String]]()
-    private var words = [String]()
+    private var data = [[String]]() {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     private var wordsFound = [String]()
     private var remainingWords = [String]()
     private var selectedCells = [IndexPath]()
     private var selectionDirection: SelectionDirection = .none
-    var delegate: GridCollectionViewControllerDelegate?
+    var delegates = [GridCollectionViewControllerDelegate?]()
     
     // MARK: Initialization
-    init(collectionView: UICollectionView, words: [String]) {
+    init(collectionView: UICollectionView) {
         self.collectionView = collectionView
         super.init()
-        
-        self.words = words.map({$0.uppercased()})
-        let wordSearchGenerator = WordSearchGenerator(numRows: 10, numColumns: 10, words: self.words)
-        data = wordSearchGenerator.generateWordSearch()
-        
+
         collectionView.register(.GridCell, forCellWithReuseIdentifier: String(describing: GridCell.self))
         
         collectionView.delegate = self
         collectionView.dataSource = self
         
         setupCollectionView()
-        
-        remainingWords = self.words
+    }
+    
+    func setData(wordSearch: [[String]], words: [String]) {
+        wordsFound.removeAll()
+        remainingWords.removeAll()
+        remainingWords = words
+        data = wordSearch
     }
 }
 
@@ -53,6 +57,7 @@ extension GridCollectionViewController: UIGestureRecognizerDelegate {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(didPan(toSelectCells:)))
         panGesture.delegate = self
         collectionView.addGestureRecognizer(panGesture)
+        collectionView.layer.cornerRadius = 8
     }
     
     @objc private func didPan(toSelectCells panGesture: UIPanGestureRecognizer) {
@@ -83,19 +88,25 @@ extension GridCollectionViewController: UIGestureRecognizerDelegate {
                     switch selectionDirection {
                     case .vertical:
                         if firstIndexPath.row == column && ((lastIndexPath.section == row + 1) || (lastIndexPath.section == row - 1)) {
-                            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredVertically)
-                            selectedCells.append(indexPath)
+                            selectCell(indexPath: indexPath, orientation: .Vertical(.TopToBottom), startOfWord: false, endOfWord: false)
                         }
                     case .horizontal:
                         if firstIndexPath.section == row && ((lastIndexPath.row == column + 1) || (lastIndexPath.row == column - 1)) {
-                            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredVertically)
-                            selectedCells.append(indexPath)
+                            selectCell(indexPath: indexPath, orientation: .Horizontal(.LeftToRight), startOfWord: false, endOfWord: false)
                         }
                     case .diagonal:
-                        if (lastIndexPath.row == column + 1 && (lastIndexPath.section == row + 1 || lastIndexPath.section == row - 1)) ||
-                            (lastIndexPath.row == column - 1 && (lastIndexPath.section == row + 1 || lastIndexPath.section == row - 1)) {
-                            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredVertically)
-                            selectedCells.append(indexPath)
+                        if (lastIndexPath.row == column + 1)  {
+                            if (lastIndexPath.section == row + 1 ) {
+                                selectCell(indexPath: indexPath, orientation: .diagonal(.BottomToTop, .RightToLeft), startOfWord: false, endOfWord: false)
+                            } else if (lastIndexPath.section == row - 1){
+                                selectCell(indexPath: indexPath, orientation: .diagonal(.TopToBottom, .RightToLeft), startOfWord: false, endOfWord: false)
+                            }
+                        } else if (lastIndexPath.row == column - 1) {
+                            if (lastIndexPath.section == row + 1 ) {
+                                selectCell(indexPath: indexPath, orientation: .diagonal(.BottomToTop, .LeftToRight), startOfWord: false, endOfWord: false)
+                            } else if (lastIndexPath.section == row - 1) {
+                                selectCell(indexPath: indexPath, orientation: .diagonal(.TopToBottom, .LeftToRight), startOfWord: false, endOfWord: false)
+                            }
                         }
                     default:
                         return
@@ -111,19 +122,22 @@ extension GridCollectionViewController: UIGestureRecognizerDelegate {
                 if remainingWords.contains(selectedChars) {
                     remainingWords.removeAll { $0 == selectedChars }
                     wordsFound.append(selectedChars)
-                    delegate?.wordFound(word: selectedChars)
+                    delegates.forEach({$0?.wordFound(word: selectedChars)})
                     wordFound = true
                 } else if remainingWords.contains(charsReversed) {
                     remainingWords.removeAll { $0 == charsReversed }
                     wordsFound.append(selectedChars)
-                    delegate?.wordFound(word: charsReversed)
+                    delegates.forEach({$0?.wordFound(word: charsReversed)})
                     wordFound = true
                 }
                 for indexPath in selectedCells {
-                    if wordFound, let cell = collectionView.cellForItem(at: indexPath) as? GridCell {
-                        cell.selectPermentantly()
+                    if let cell = collectionView.cellForItem(at: indexPath) as? GridCell {
+                        if wordFound {
+                            cell.selectPermenantly()
+                        } else {
+                            cell.deselect()
+                        }
                     }
-                    collectionView.deselectItem(at: indexPath, animated: true)
                 }
                 selectedCells.removeAll()
                 selectionDirection = .none
@@ -181,6 +195,22 @@ extension GridCollectionViewController: UICollectionViewDelegateFlowLayout {
         let height = collectionView.frame.height / CGFloat(data.count)
         let width = collectionView.frame.width / CGFloat(data[0].count)
         return CGSize(width: width, height: height)
+    }
+}
+
+
+// MARK - Utility
+private extension GridCollectionViewController {
+    func selectCell(indexPath: IndexPath, orientation: WordOrientation, startOfWord: Bool, endOfWord: Bool) {
+        if selectedCells.count == 1 {
+            if let cell = collectionView.cellForItem(at: selectedCells[0]) as? GridCell {
+                cell.select(orientation: orientation, startOfSelection: startOfWord, endOfSelection: endOfWord)
+            }
+        }
+        if let cell = collectionView.cellForItem(at: indexPath) as? GridCell {
+            cell.select(orientation: orientation, startOfSelection: startOfWord, endOfSelection: endOfWord)
+            selectedCells.append(indexPath)
+        }
     }
 }
 
